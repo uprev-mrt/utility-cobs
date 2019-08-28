@@ -7,19 +7,14 @@
   *@info https://en.wikipedia.org/wiki/Consistent_Overhead_Byte_Stuffing
   */
 
+#include "cobs.h"
 
-  typedef enum{
-    COBS_OK=0,
-    COBS_ERROR = 1
-  }cobs_status_e;
-
-cobs_status_e cobs_encode(const uint8_t* ptr, int len, uint8_t* dst)
+int cobs_encode(const uint8_t* ptr, int len, uint8_t* dst)
 {
-  const uint8_t *start = dst, *end = ptr + length;
+  const uint8_t *start = dst, *end = ptr + len;
 	uint8_t code, *code_ptr; /* Where to insert the leading count */
 
-  code_ptr = dst++;
-  code = 1;
+  code_ptr = dst++ , code = 1;
 	while (ptr < end)
   {
 		if (code != 0xFF)
@@ -33,8 +28,7 @@ cobs_status_e cobs_encode(const uint8_t* ptr, int len, uint8_t* dst)
 			}
 		}
     *code_ptr = code;
-    code_ptr = dst++;
-    code = 1;
+    code_ptr = dst++ , code = 1;
 
 	}
   *code_ptr++ = code;
@@ -43,9 +37,10 @@ cobs_status_e cobs_encode(const uint8_t* ptr, int len, uint8_t* dst)
   return (int)(dst-start);
 }
 
-cobs_status_e cobs_decode(const uint8_t* ptr, int len, uint8_t* dst)
+int cobs_decode(const uint8_t* ptr, int len, uint8_t* dst)
 {
-  const uint8_t *start = dst, *end = ptr + encodedLen;
+  const uint8_t *start = dst;
+  const uint8_t *end = ptr + len;
 	uint8_t code = 0xFF, copy = 0;
 
   for (; ptr < end; copy--)
@@ -58,7 +53,9 @@ cobs_status_e cobs_decode(const uint8_t* ptr, int len, uint8_t* dst)
     {
       if (code != 0xFF)
         *dst++ = 0;
+
       copy = code = *ptr++;
+
       if (code == 0)
         break; /* Source length too long */
     }

@@ -6,7 +6,9 @@
   *
   *@info https://en.wikipedia.org/wiki/Consistent_Overhead_Byte_Stuffing
   */
+#pragma once
 
+#include <stdint.h>
 
 /**
   *@brief returns the maximum length of encoded data

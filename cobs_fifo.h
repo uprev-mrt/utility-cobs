@@ -18,7 +18,6 @@
   */
 
 #pragma once
-
 #include <stdint.h>
 #include "Platforms/Common/mrt_platform.h"
 

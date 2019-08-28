@@ -142,23 +142,23 @@ cobs_fifo_status_e cobs_fifo_pop_buf(cobs_fifo_t* fifo, uint8_t* data, int len)
 }
 
 
-cob_fifo_status_e cob_fifo_push_frame(cob_fifo_t* fifo, const uint8_t* data, int len)
+cobs_fifo_status_e cobs_fifo_push_frame(cobs_fifo_t* fifo, const uint8_t* data, int len)
 {
   int maxEncodedLen = len + ((len+255)/254);
   if((maxEncodedLen + fifo->mCount) > fifo->mMaxLen)
-    return COB_FIFO_OVERFLOW;
+    return COBS_FIFO_OVERFLOW;
 
   uint8_t encoded[maxEncodedLen];
 
   int encodedLen = cobs_encode(data, len, encoded);
 
-  cob_fifo_push_buf(fifo,encoded,encodedLen);
+  cobs_fifo_push_buf(fifo,encoded,encodedLen);
 
-  return COB_FIFO_OK;
+  return COBS_FIFO_OK;
 }
 
 
-int cob_fifo_pop_frame(cob_fifo_t* fifo, uint8_t* data, int len)
+int cobs_fifo_pop_frame(cobs_fifo_t* fifo, uint8_t* data, int len)
 {
   if(fifo->mFrameCount ==0)
     return 0;
@@ -168,12 +168,12 @@ int cob_fifo_pop_frame(cob_fifo_t* fifo, uint8_t* data, int len)
 
   uint8_t encoded[encodedLen];
 
-  cob_fifo_pop_buf(fifo,encoded,encodedLen);
+  cobs_fifo_pop_buf(fifo,encoded,encodedLen);
 
   decodedLen = cobs_decode(encoded, encodedLen, data);
 
 
-  cob_fifo_find_next_len(fifo);
+  cobs_fifo_find_next_len(fifo);
 
 	return decodedLen; //we dont include the delim in the length return
 }
