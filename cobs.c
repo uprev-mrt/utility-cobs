@@ -7,7 +7,11 @@
   *@info https://en.wikipedia.org/wiki/Consistent_Overhead_Byte_Stuffing
   */
 
+/*Code-Block-Includes-----------------------------------------------------------------------*/
+
 #include "cobs.h"
+
+/*Code-Block-Functions----------------------------------------------------------------------*/
 
 int cobs_encode(const uint8_t* ptr, int len, uint8_t* dst)
 {
@@ -63,3 +67,5 @@ int cobs_decode(const uint8_t* ptr, int len, uint8_t* dst)
 
   return (dst - start) -1; //we dont include the delim in the length return
 }
+
+/*Code-Block-End----------------------------------------------------------------------------*/

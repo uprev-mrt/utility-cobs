@@ -8,7 +8,12 @@
   */
 #pragma once
 
+/*Code-Block-Includes-----------------------------------------------------------------------*/
+
+
 #include <stdint.h>
+
+/*Code-Block-Macros-------------------------------------------------------------------------*/
 
 /**
   *@brief returns the maximum length of encoded data
@@ -17,11 +22,16 @@
   */
 #define COBS_MAX_LEN(x) ((x) + (((x)+255)/254) + 1)
 
+/*Code-Block-Typedefs-----------------------------------------------------------------------*/
+
 
   typedef enum{
     COBS_OK=0,
     COBS_ERROR = -1
   }cobs_status_e;
+
+/*Code-Block-Functions----------------------------------------------------------------------*/
+
 
 /**
   *@brief Performs Byte stuffing and stores encoded data
@@ -41,3 +51,5 @@ int cobs_encode(const uint8_t* ptr, int len, uint8_t* dst);
   *@return length of decoded data
   */
 int cobs_decode(const uint8_t* ptr, int len, uint8_t* dst);
+
+/*Code-Block-End----------------------------------------------------------------------------*/

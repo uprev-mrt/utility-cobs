@@ -18,8 +18,13 @@
   */
 
 #pragma once
+
+/*Code-Block-Includes-----------------------------------------------------------------------*/
+
 #include <stdint.h>
 #include "Platforms/Common/mrt_platform.h"
+
+/*Code-Block-Typedefs-----------------------------------------------------------------------*/
 
 typedef enum{
   COBS_FIFO_OK=0,
@@ -38,6 +43,9 @@ typedef struct {
     int mNextLen;        //length of next frame in fifo (including delim)
     MRT_MUTEX_TYPE mMutex;        //lock for fifo that is accessed by multiple threads
 } cobs_fifo_t;
+
+/*Code-Block-Functions----------------------------------------------------------------------*/
+
 
 /**
   *@brief initializes the Consistent Overhead ByteStuffing
@@ -110,3 +118,5 @@ int cobs_fifo_pop_frame(cobs_fifo_t* fifo, uint8_t* data, int len);
   *@return zero if no frames are available
   */
 int cobs_fifo_get_next_len(cobs_fifo_t* fifo);
+
+/*Code-Block-End----------------------------------------------------------------------------*/

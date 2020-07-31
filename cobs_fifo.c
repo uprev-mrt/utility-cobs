@@ -7,11 +7,15 @@
   *@info https://en.wikipedia.org/wiki/Consistent_Overhead_Byte_Stuffing
   */
 
+/*Code-Block-Includes-----------------------------------------------------------------------*/
+
 #include "cobs.h"
 #include "cobs_fifo.h"
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
+
+/*Code-Block-Functions----------------------------------------------------------------------*/
 
 /**
   *@brief finds the next zero
@@ -216,3 +220,6 @@ int cobs_fifo_get_next_len(cobs_fifo_t* fifo)
   MRT_MUTEX_UNLOCK(fifo->mMutex);
   return retVal;
 }
+
+/*Code-Block-End----------------------------------------------------------------------------*/
+
