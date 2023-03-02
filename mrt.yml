@@ -1,0 +1,5 @@
+---
+name: cobs
+description: COBS encoding utility and FiFO with built in COBS encoding
+category: Utility
+requires: []
